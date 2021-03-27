@@ -1,7 +1,10 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { createStore, combineReducers } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import counterReducer from './counter/counter-reducer';
 import todosReducer from './todos/todos-reducer';
+
+// import { combineReducers } from 'redux';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 // const initialStore = { counterValue: 0 };
 // const initialStore = {
@@ -79,11 +82,25 @@ import todosReducer from './todos/todos-reducer';
 //   }
 // });
 
-const rootReducer = combineReducers({
-  counter: counterReducer,
-  todos: todosReducer,
-});
+// const rootReducer = combineReducers({
+//   counter: counterReducer,
+//   todos: todosReducer,
+// });
 
-const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer, composeWithDevTools());
+
+console.log(process.env);
+console.log(getDefaultMiddleware());
+// const store = configureStore({
+//   reducer: rootReducer,
+//   devTools: process.env.NODE_ENV === 'development',
+// });
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    todos: todosReducer,
+  },
+  devTools: process.env.NODE_ENV === 'development',
+});
 
 export default store;
