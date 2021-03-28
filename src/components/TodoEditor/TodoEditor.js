@@ -15,9 +15,13 @@ class TodoEditor extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state.message);
-
-    this.setState({ message: '' });
+    if (this.state.message !== '') {
+      this.props.onSubmit(this.state.message);
+      this.props.onSave();
+      this.setState({ message: '' });
+      return;
+    }
+    alert('note is empty. please write anything down');
   };
 
   render() {
